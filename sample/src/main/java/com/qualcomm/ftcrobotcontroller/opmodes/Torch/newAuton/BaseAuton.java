@@ -18,13 +18,16 @@ public abstract class BaseAuton extends LinearOpMode {
     static int RED_LAST_DIST    = 13;
     static int WAIT_TIME        = 10 * 1000; //ten seconds
 
-
+    enum Wait {
+        YES,NO
+    }
     enum Alliance {
         RED,BLUE
     }
-
+    abstract Wait     getWait();
     abstract Alliance getAlliance();
 
+    boolean wait = getWait() == Wait.YES;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -33,8 +36,8 @@ public abstract class BaseAuton extends LinearOpMode {
 
         waitForStart();
         fetty.initializeServos();
-        //sleep(WAIT_TIME);
-        //TODO create a method that determines whether to wait or not.
+
+        if (wait) {sleep(WAIT_TIME);}
 
         //if alliance.BLUE == true, then dist = 24, else dist = 73
         int firstdist = alliance == alliance.BLUE ? BLUE_MOVE_DIST : RED_MOVE_DIST;

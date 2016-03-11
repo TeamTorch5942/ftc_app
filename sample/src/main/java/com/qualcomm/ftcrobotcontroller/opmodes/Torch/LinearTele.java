@@ -69,10 +69,7 @@ public class LinearTele extends LinearOpMode {
             else                    {fetty.move (one.left_stick_y, one.right_stick_y);}
 
             if (gamepad1.dpad_up) {
-                fetty.frontRight.setPower(-0.5);
-                fetty.backRight.setPower(-0.5);
-                fetty.frontLeft.setPower(-0.5);
-                fetty.backLeft.setPower(-0.5);
+                fetty.move(1*fetty.reverseVal, 1*fetty.reverseVal);
             }
 
 

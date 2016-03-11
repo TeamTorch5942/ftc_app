@@ -22,14 +22,14 @@ import com.lasarobotics.library.drive.Tank;
 public class RobotSetup {
 
     //We want these to be private because we never directly tell them what to do.
+    //That is, until travis makes them public because he hates nice things.
+
     //for control, we use move(), moveWinch(), etc. and not (arm1 = 1.0)
-    //Gyro is public because sometimes I call bot.G.calibrate().
-    //Could be made private once we have functions for every gyro use.
-    //similarly, menu is public because we call bot.menu.show()
-    public DcMotor frontLeft, frontRight, backLeft, backRight, arm1, arm2;
+
+    private DcMotor frontLeft, frontRight, backLeft, backRight, arm1, arm2;
     private Servo Servo1, Servo2, Servo3, Servo4, Servo5, Servo6;
     private DeviceInterfaceModule cdim;
-    public  ModernRoboticsI2cGyro G;
+    private  ModernRoboticsI2cGyro G;
     public  OptionMenu allianceMenu;
     public  ColorSensor colorSensor;
     public  OpticalDistanceSensor IRsensor;
@@ -37,9 +37,8 @@ public class RobotSetup {
     public  ServoController servoController;
 
     //declare Reverse Variable
-    boolean reverseVal = false;
+    int reverseVal = 0;
 
-    private double bumperPos = 1;
 
     //declare motor control variables
     private int leftEncoderDistance;
@@ -108,8 +107,8 @@ public class RobotSetup {
                         backRight,
                         l, r);}
 
-    public void     reverse()   {reverseVal = !reverseVal;}
-    public boolean  isreversed(){return reverseVal;}
+    public void     reverse()   {reverseVal = 1-reverseVal;}
+    public boolean  isreversed(){return reverseVal == 1;}
 
 
     public int lDistance() {return frontLeft.getCurrentPosition() - leftEncoderDistance;}
@@ -204,13 +203,7 @@ public class RobotSetup {
         telemetry.addData("Blue ", colorSensor.blue());
     }
 
-    //----------------------------------------------------------------TELEMETRY FUNCTIONS
-    public void defaultTelemetry(){
-        telemetry.addData("Gyro", gyroDelta());
-        telemetry.addData("reversed", isreversed());
-        telemetry.addData("Encoder L", lDistance());
-        telemetry.addData("Encoder R", rDistance());
-    }
+
 
 
 
@@ -226,21 +219,7 @@ public class RobotSetup {
         }
         return allianceMenu.selectedOption("alliance");
     }
-    public boolean isRed(){
-        return (getAlliance().equals("Red"));
-    }
-    public boolean isBlue(){
-        return (getAlliance().equals("Blue"));
-    }
+    public boolean isRed() {return (getAlliance().equals("Red"));}
+    public boolean isBlue(){return (getAlliance().equals("Blue"));}
 
-
-    public void startRobot() throws InterruptedException {
-        blueLED(false);
-        redLED(false);
-        move(0,0);
-        moveTape(0);
-        moveWinch(0);
-        resetEncoders();
-        reverseVal = false;
-    }
 }

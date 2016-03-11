@@ -57,9 +57,6 @@ public class FtcOpModeRegister implements OpModeRegister {
         manager.register("LinearTele", LinearTele.class);
         manager.register("AutonBlue",AutonBlue.class);
         manager.register("AutonRed",AutonRed.class);
-        manager.register("AutonBlueWait",AutonBlueWait.class);
-        manager.register("AutonRed.Wait", AutonRedWait.class);
-        manager.register("driveTest", driveTest.class);
         manager.register("RedColor", AutonRedColor.class);
     }
 }

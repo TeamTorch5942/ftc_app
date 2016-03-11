@@ -13,7 +13,6 @@ public class AutonRedWait extends LinearOpMode {
         waitForStart();
 
         sleep(10000);
-        fetty.blueLED(false);
         fetty.encoderMove(24, 0.3);
         fetty.encoderMove(73, 0.7);
         fetty.gTurn(40, 0.2);

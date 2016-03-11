@@ -31,13 +31,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-import com.qualcomm.ftcrobotcontroller.opmodes.Torch.AutonBlueWait;
-import com.qualcomm.ftcrobotcontroller.opmodes.Torch.AutonRed;
-import com.qualcomm.ftcrobotcontroller.opmodes.Torch.AutonRedColor;
-import com.qualcomm.ftcrobotcontroller.opmodes.Torch.AutonRedWait;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.AutonBlueWait;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.AutonRed;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.AutonRedColor;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.AutonRedWait;
 import com.qualcomm.ftcrobotcontroller.opmodes.Torch.LinearTele;
-import com.qualcomm.ftcrobotcontroller.opmodes.Torch.AutonBlue;
-import com.qualcomm.ftcrobotcontroller.opmodes.Torch.driveTest;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.AutonBlue;
+import com.qualcomm.ftcrobotcontroller.opmodes.Tests.driveTest;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
 

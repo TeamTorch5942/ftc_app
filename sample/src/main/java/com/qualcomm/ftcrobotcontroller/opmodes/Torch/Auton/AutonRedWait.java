@@ -1,5 +1,6 @@
-package com.qualcomm.ftcrobotcontroller.opmodes.Torch;
+package com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton;
 
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.RobotSetup;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /**
@@ -8,13 +9,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 public class AutonRedWait extends LinearOpMode {
     public void runOpMode()throws InterruptedException {
         RobotSetup fetty = new RobotSetup(hardwareMap,telemetry,this);
-        fetty.startRobot();
         fetty.initializeServos();
         waitForStart();
-        while (fetty.G.isCalibrating() && opModeIsActive()){
-            fetty.blueLED(true);
-            waitOneFullHardwareCycle();
-        }
+
         sleep(10000);
         fetty.blueLED(false);
         fetty.encoderMove(24, 0.3);

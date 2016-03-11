@@ -47,7 +47,7 @@ public class RobotSetup {
     private Telemetry telemetry;
     private LinearOpMode opControl;
 
-    RobotSetup(HardwareMap hardwareMap, Telemetry _telemetry, LinearOpMode op) throws
+    public RobotSetup(HardwareMap hardwareMap, Telemetry _telemetry, LinearOpMode op) throws
             InterruptedException {
         opControl = op;
         telemetry   = _telemetry; //No idea what this does, ask suitbots?
@@ -135,7 +135,7 @@ public class RobotSetup {
     public void moveTape    (double power)    {arm2.setPower(power);}
 
 
-    public void climberR    (double position) {Servo1.setPosition(1-position);}
+    public void climberR    (double position) {Servo1.setPosition(1 - position);}
     public void climberL    (double position) {Servo2.setPosition(position);}
     public void dumpArm     (double position) {Servo3.setPosition(position);}
     public void allClearL   (double position) {Servo4.setPosition(1-position);}

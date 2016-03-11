@@ -10,7 +10,6 @@ public class FloorIR extends LinearOpMode{
     public void runOpMode() throws InterruptedException {
         RobotSetup fetty  = new RobotSetup(hardwareMap,telemetry,this);
 
-        fetty.startRobot();           //run our initialization function
         fetty.initializeServos();
         fetty.allClearR(0.5);
         fetty.allClearL(0.5);

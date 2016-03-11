@@ -29,7 +29,7 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-package com.qualcomm.ftcrobotcontroller.opmodes.Torch;
+package com.qualcomm.ftcrobotcontroller.opmodes.Tests;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -54,7 +54,7 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
  * You can use the X button on either gamepad to turn the LED on and off.
  *
  */
-public class MRRGBExample extends LinearOpMode {
+public class ColorSensorTest extends LinearOpMode {
 
   ColorSensor sensorRGB;
   OpticalDistanceSensor IRsensor;

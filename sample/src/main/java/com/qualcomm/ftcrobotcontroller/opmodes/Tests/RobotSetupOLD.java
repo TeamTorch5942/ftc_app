@@ -1,4 +1,4 @@
-package com.qualcomm.ftcrobotcontroller.opmodes.Torch;
+package com.qualcomm.ftcrobotcontroller.opmodes.Tests;
 
 import com.lasarobotics.library.drive.Tank;
 import com.lasarobotics.library.options.OptionMenu;

@@ -1,5 +1,6 @@
-package com.qualcomm.ftcrobotcontroller.opmodes.Torch;
+package com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton;
 
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.RobotSetup;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /**
@@ -12,10 +13,7 @@ public class AutonRedColor extends LinearOpMode {
         fetty.initializeServos();
         fetty.resetLEncoder();
         fetty.resetREncoder();
-        while (fetty.G.isCalibrating() && opModeIsActive()) {
-            fetty.blueLED(true);
-            waitOneFullHardwareCycle();
-        }
+
         fetty.blueLED(false);
         fetty.encoderMove(24, 0.3);
         fetty.encoderMove(73, 0.7);

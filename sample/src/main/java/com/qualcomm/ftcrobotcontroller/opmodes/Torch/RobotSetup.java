@@ -122,6 +122,8 @@ public class RobotSetup {
         resetREncoder();
     }
     public void encoderMove(double inches, double power) throws InterruptedException {
+        resetLEncoder();
+        resetREncoder();
         while (Math.abs(avgDistance() )<= Math.abs(inches*1600/12)) {
             opControl.waitOneFullHardwareCycle();
             move(power,power);
@@ -146,7 +148,7 @@ public class RobotSetup {
     public void initializeServos () {
         climberL(0);
         climberR(0);
-        dumpArm(0.6);
+        dumpArm(0.4);
         allClearL(0);
         allClearR(0);
         button(0);

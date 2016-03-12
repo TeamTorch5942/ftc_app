@@ -11,10 +11,10 @@ public abstract class BaseAuton extends LinearOpMode {
     //static means these can't be modified by the program.
     static int BLUE_TURN_ANGLE  = 130;
     static int RED_TURN_ANGLE   = 40;
-    static int BLUE_MOVE_DIST   = 124;
-    static int RED_MOVE_DIST    = 73;
+    static int BLUE_MOVE_DIST   = 100;
+    static int RED_MOVE_DIST    = 49;
     static int LIGHT_THRESHOLD  = 15;
-    static int BLUE_LAST_DIST   = 13;
+    static int BLUE_LAST_DIST   = 20;
     static int RED_LAST_DIST    = 13;
     static int WAIT_TIME        = 10 * 1000; //ten seconds
 
@@ -50,7 +50,7 @@ public abstract class BaseAuton extends LinearOpMode {
         fetty.encoderMove(24, 0.3);
         fetty.encoderMove(firstdist, 0.7);
 
-        fetty.gTurn(turn,0.3);
+        fetty.gTurn(turn, 0.4);
 
         fetty.allClearL(0.5);
         
@@ -59,11 +59,25 @@ public abstract class BaseAuton extends LinearOpMode {
             fetty.move(0.2, 0.2);
         }
 
-        fetty.move(0,0);
+        fetty.move(0, 0);
         fetty.dumpArm(1);
-        fetty.button(0.45);
         sleep(1000);
-        fetty.dumpArm(0.6);
+        fetty.dumpArm(0.4);
+        fetty.button(.2);
+        fetty.encoderMove(5.5, .5);
+        telemetry.addData("Red  ", fetty.colorSensor.red());
+        telemetry.addData("Green", fetty.colorSensor.green());
+        telemetry.addData("Blue ", fetty.colorSensor.blue());
+        sleep(1000);
+        if (fetty.colorSensor.blue() > fetty.colorSensor.red()) {
+            fetty.button(0.45);
+        } else if (fetty.colorSensor.red() > fetty.colorSensor.blue()) {
+            fetty.encoderMove(4,-.5);
+            sleep(100);
+            fetty.button(0.45);
+        }
+
+        sleep(1000);
         fetty.button(0);
         sleep(500);
         fetty.encoderMove(lastdist, lastdir);

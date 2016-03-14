@@ -35,6 +35,7 @@ import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.AutonBlueWait;
 import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.AutonRed;
 import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.AutonRedColor;
 import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.AutonRedWait;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.FloorIR;
 import com.qualcomm.ftcrobotcontroller.opmodes.Torch.LinearTele;
 import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.AutonBlue;
 import com.qualcomm.ftcrobotcontroller.opmodes.Tests.driveTest;
@@ -57,7 +58,8 @@ public class FtcOpModeRegister implements OpModeRegister {
     public void register(OpModeManager manager) {
         //Custom op modes
         manager.register("Teleop", LinearTele.class);
-        manager.register("New Blue Auton", NewAutonBlue.class);
-        manager.register("New Red Auton", NewAutonRed.class);
+        manager.register("Blue Auton", NewAutonBlue.class);
+        manager.register("Red Auton", NewAutonRed.class);
+        manager.register("FloorIR", FloorIR.class);
     }
 }

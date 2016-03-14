@@ -205,6 +205,9 @@ public class RobotSetup {
         telemetry.addData("Blue ", colorSensor.blue());
     }
 
+    public void floorTelemetry() {
+        telemetry.addData("IR", floorIR.getLightDetectedRaw());
+    }
 
 
 

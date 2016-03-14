@@ -16,6 +16,7 @@ public class FloorIR extends LinearOpMode{
         waitForStart();
         while(opModeIsActive()){
             fetty.colorTelemetry();
+            fetty.floorTelemetry();
             fetty.dumpArm((gamepad1.left_stick_y+1)/2);
         }
 

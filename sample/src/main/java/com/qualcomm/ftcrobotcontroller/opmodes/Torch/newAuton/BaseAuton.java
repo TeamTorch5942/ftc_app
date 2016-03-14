@@ -12,10 +12,11 @@ public abstract class BaseAuton extends LinearOpMode {
     static int BLUE_TURN_ANGLE  = 130;
     static int RED_TURN_ANGLE   = 40;
     static int BLUE_MOVE_DIST   = 100;
-    static int RED_MOVE_DIST    = 49;
-    static int LIGHT_THRESHOLD  = 15;
+    static int RED_MOVE_DIST    = 51;
+    static int LIGHT_THRESHOLD  = 100;
     static int BLUE_LAST_DIST   = 20;
-    static int RED_LAST_DIST    = 13;
+    static int RED_LAST_DIST    = 18;
+    static int AVOID_RED        = 4;
     static int WAIT_TIME        = 10 * 1000; //ten seconds
 
     enum Wait {
@@ -43,6 +44,7 @@ public abstract class BaseAuton extends LinearOpMode {
         int firstdist = alliance == alliance.BLUE ? BLUE_MOVE_DIST : RED_MOVE_DIST;
         int turn      = alliance == alliance.BLUE ? BLUE_TURN_ANGLE: RED_TURN_ANGLE;
         int lastdist  = alliance == alliance.BLUE ? BLUE_LAST_DIST : RED_LAST_DIST;
+        int red_move  = alliance == alliance.BLUE ? 0 : AVOID_RED;
         double lastdir= alliance == alliance.BLUE ? 0.5 : -0.5;
 
 
@@ -53,25 +55,29 @@ public abstract class BaseAuton extends LinearOpMode {
         fetty.gTurn(turn, 0.4);
 
         fetty.allClearL(0.5);
+        fetty.encoderMove(red_move, .5);
         
         while (fetty.floorIR.getLightDetectedRaw() < LIGHT_THRESHOLD && opModeIsActive()) {
             waitOneFullHardwareCycle();
             fetty.move(0.2, 0.2);
         }
 
-        fetty.move(0, 0);
+        fetty.encoderMove(2,.3);
         fetty.dumpArm(1);
         sleep(1000);
         fetty.dumpArm(0.4);
         fetty.button(.2);
-        fetty.encoderMove(5.5, .5);
+        fetty.encoderMove(3.5, .5);
         telemetry.addData("Red  ", fetty.colorSensor.red());
         telemetry.addData("Green", fetty.colorSensor.green());
         telemetry.addData("Blue ", fetty.colorSensor.blue());
         sleep(1000);
-        if (fetty.colorSensor.blue() > fetty.colorSensor.red()) {
+        int color     = alliance == alliance.BLUE ? fetty.colorSensor.blue() : fetty.colorSensor.red();
+        int not_color = alliance == alliance.BLUE ? fetty.colorSensor.red() : fetty.colorSensor.blue();
+
+        if (color > not_color) {
             fetty.button(0.45);
-        } else if (fetty.colorSensor.red() > fetty.colorSensor.blue()) {
+        } else if (not_color > color) {
             fetty.encoderMove(4,-.5);
             sleep(100);
             fetty.button(0.45);

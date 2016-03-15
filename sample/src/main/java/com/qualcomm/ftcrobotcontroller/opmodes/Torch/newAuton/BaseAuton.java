@@ -2,6 +2,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes.Torch.newAuton;
 
 import com.qualcomm.ftcrobotcontroller.opmodes.Torch.RobotSetup;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 
 /**
  * Created by taand on 3/10/2016.
@@ -19,6 +20,7 @@ public abstract class BaseAuton extends LinearOpMode {
     static int AVOID_RED        = 4;
     static int WAIT_TIME        = 10 * 1000; //ten seconds
 
+
     enum Wait {
         YES,NO
     }
@@ -35,8 +37,10 @@ public abstract class BaseAuton extends LinearOpMode {
         Alliance alliance = getAlliance();
         RobotSetup fetty = new RobotSetup(hardwareMap,telemetry,this);
 
+
         waitForStart();
         fetty.initializeServos();
+
 
         if (wait) {sleep(WAIT_TIME);}
 
@@ -62,7 +66,7 @@ public abstract class BaseAuton extends LinearOpMode {
             fetty.move(0.2, 0.2);
         }
 
-        fetty.encoderMove(2,.3);
+        fetty.encoderMove(2, .3);
         fetty.dumpArm(1);
         sleep(1000);
         fetty.dumpArm(0.4);
@@ -76,16 +80,18 @@ public abstract class BaseAuton extends LinearOpMode {
         int not_color = alliance == alliance.BLUE ? fetty.colorSensor.red() : fetty.colorSensor.blue();
 
         if (color > not_color) {
-            fetty.button(0.45);
+            fetty.smack(3);
         } else if (not_color > color) {
             fetty.encoderMove(4,-.5);
             sleep(100);
-            fetty.button(0.45);
+            fetty.smack(3);
         }
 
         sleep(1000);
         fetty.button(0);
         sleep(500);
         fetty.encoderMove(lastdist, lastdir);
+        fetty.servoController.pwmDisable();
+
     }
 }

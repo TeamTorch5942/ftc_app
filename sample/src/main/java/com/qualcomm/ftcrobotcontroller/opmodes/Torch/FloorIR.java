@@ -13,6 +13,7 @@ public class FloorIR extends LinearOpMode{
         fetty.initializeServos();
         fetty.allClearR(0.5);
         fetty.allClearL(0.5);
+        fetty.button(.3);
         waitForStart();
         while(opModeIsActive()){
             fetty.colorTelemetry();

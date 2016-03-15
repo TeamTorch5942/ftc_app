@@ -14,6 +14,7 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.lasarobotics.library.options.OptionMenu;
 import com.qualcomm.robotcore.hardware.ServoController;
+import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.robocol.Telemetry;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -35,6 +36,7 @@ public class RobotSetup {
     public  OpticalDistanceSensor IRsensor;
     public  OpticalDistanceSensor floorIR;
     public  ServoController servoController;
+    private  VoltageSensor voltage;
 
     //declare Reverse Variable
     int reverseVal = 0;
@@ -57,6 +59,7 @@ public class RobotSetup {
         cdim        = hardwareMap.deviceInterfaceModule.get("dim");
         floorIR     = hardwareMap.opticalDistanceSensor.get("ir");
         colorSensor = hardwareMap.colorSensor.get("color");
+        voltage     = hardwareMap.voltageSensor.get("v");
 
 
         //Motors
@@ -127,7 +130,7 @@ public class RobotSetup {
         while (Math.abs(avgDistance() )<= Math.abs(inches*1600/12)) {
             opControl.waitOneFullHardwareCycle();
             move(power,power);
-            telemetry.addData("distance",avgDistance()*12/1600);
+            telemetry.addData("distance",avgDistance()*12 / 1600);
         }
         move(0, 0);
     }
@@ -144,6 +147,17 @@ public class RobotSetup {
     public void allClearR   (double position) {Servo5.setPosition(position);}
     public void button      (double position) {Servo6.setPosition(position);}
 
+    public void smack       (double count) throws InterruptedException {
+
+        for (int i = 0; i < count; i++) {
+            button(0.45);
+            opControl.sleep(100);
+            button(.2);
+            opControl.sleep(100);
+        }
+    }
+
+
     //TODO make all initalize at 0
     public void initializeServos () {
         climberL(0);
@@ -152,7 +166,7 @@ public class RobotSetup {
         allClearL(0);
         allClearR(0);
         button(0);
-
+        vCheck();
     }
 
 
@@ -168,6 +182,7 @@ public class RobotSetup {
     //----------------------------------------------------------------SENSOR FUNCTIONS
 
     //TODO new Gyro Reset functions
+    public double vCheck() {return voltage.getVoltage();}
     public int gyroDelta() {return gyroDistance - G.getIntegratedZValue();}
     public void resetDelta(){gyroDistance  = G.getIntegratedZValue();}
 
@@ -183,6 +198,7 @@ public class RobotSetup {
         }
         move(0, 0);
         resetEncoders();
+        telemetry.addData("Gyro", gyroDelta());
     }
 
     public void gTurnAbsolute(int degrees, double power) throws InterruptedException {

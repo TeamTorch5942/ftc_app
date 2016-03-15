@@ -36,28 +36,18 @@ public class LinearTele extends LinearOpMode {
             else if (two.left_bumper == ButtonState.HELD) fetty.moveWinch(-1);
             else    fetty.moveWinch(0);
 
-            //left  down = 1.
-            //right down = 0.
-            if (one.left_bumper  == ButtonState.HELD) fetty.climberL(1);   else fetty.climberL(0);
-            if (one.right_bumper == ButtonState.HELD) fetty.climberR(1);   else fetty.climberR(0);
-            if (one.y            == ButtonState.HELD) fetty.dumpArm(1);    else fetty.dumpArm(0.6);
+
+            if (one.left_bumper  == ButtonState.HELD) fetty.climberL(fetty.CLIMBER_OUT);   else fetty.climberL(fetty.CLIMBER_IN);
+            if (one.right_bumper == ButtonState.HELD) fetty.climberR(fetty.CLIMBER_OUT);   else fetty.climberR(fetty.CLIMBER_IN);
+            if (one.y            == ButtonState.HELD) fetty.dumpArm(fetty.DUMP_DOWN);      else fetty.dumpArm(fetty.DUMP_UP);
             if (one.right_trigger== 1 || one.left_trigger == 1) {
-                fetty.allClearR(1);
-                fetty.allClearL(1);
+                fetty.allClearR(fetty.CLEAR_IN);
+                fetty.allClearL(fetty.CLEAR_IN);
             }
             else {
-                fetty.allClearR(0);
-                fetty.allClearL(0);
+                fetty.allClearR(fetty.CLEAR_OUT);
+                fetty.allClearL(fetty.CLEAR_OUT);
             }
-            if (one.dpad_right == ButtonState.HELD && beaconPos <= 1) {
-                beaconPos += 0.05;
-            }
-            else if (one.dpad_left ==ButtonState.HELD && beaconPos >= 0) {
-                beaconPos -= 0.05;
-            }
-            beaconPos = Range.clip(beaconPos, 0, 1);
-            fetty.button(beaconPos);
-            telemetry.addData("beaconPos",beaconPos);
 
             //--------------------------------DIRECTION
             //This reverses our robot, so what was once our back is now our front.
@@ -69,7 +59,10 @@ public class LinearTele extends LinearOpMode {
             else                    {fetty.move (one.left_stick_y, one.right_stick_y);}
 
             if (gamepad1.dpad_up) {
-                fetty.move(1*fetty.reverseVal, 1*fetty.reverseVal);
+                fetty.frontLeft.setPower(-0.5);
+                fetty.frontRight.setPower(-0.5);
+                fetty.backLeft.setPower(-0.5);
+                fetty.backRight.setPower(-0.5);
             }
 
 

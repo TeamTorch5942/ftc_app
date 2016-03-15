@@ -33,6 +33,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
+
 public class driveTest extends OpMode {
     DcMotor frontRight;
     DcMotor frontLeft;
@@ -53,7 +54,7 @@ public class driveTest extends OpMode {
     }
     @Override
     public void loop() {
-        float right = gamepad1.right_stick_y;
+        float right =  gamepad1.right_stick_y;
         float left  =  gamepad1.left_stick_y;
         right = Range.clip(right, -1, 1);
         left = Range.clip(left, -1, 1);

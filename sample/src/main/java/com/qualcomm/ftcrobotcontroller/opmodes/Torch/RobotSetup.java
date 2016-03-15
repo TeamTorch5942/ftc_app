@@ -27,15 +27,15 @@ public class RobotSetup {
 
     //for control, we use move(), moveWinch(), etc. and not (arm1 = 1.0)
 
-    private DcMotor frontLeft, frontRight, backLeft, backRight, arm1, arm2;
-    private Servo Servo1, Servo2, Servo3, Servo4, Servo5, Servo6;
-    private DeviceInterfaceModule cdim;
+    public   DcMotor frontLeft, frontRight, backLeft, backRight, arm1, arm2;
+    private  Servo Servo1, Servo2, Servo3, Servo4, Servo5, Servo6;
+    private  DeviceInterfaceModule cdim;
     private  ModernRoboticsI2cGyro G;
-    public  OptionMenu allianceMenu;
-    public  ColorSensor colorSensor;
-    public  OpticalDistanceSensor IRsensor;
-    public  OpticalDistanceSensor floorIR;
-    public  ServoController servoController;
+    public   OptionMenu allianceMenu;
+    public   ColorSensor colorSensor;
+    public   OpticalDistanceSensor IRsensor;
+    public   OpticalDistanceSensor floorIR;
+    public   ServoController servoController;
     private  VoltageSensor voltage;
 
     //declare Reverse Variable
@@ -59,7 +59,6 @@ public class RobotSetup {
         cdim        = hardwareMap.deviceInterfaceModule.get("dim");
         floorIR     = hardwareMap.opticalDistanceSensor.get("ir");
         colorSensor = hardwareMap.colorSensor.get("color");
-        voltage     = hardwareMap.voltageSensor.get("v");
 
 
         //Motors
@@ -147,26 +146,36 @@ public class RobotSetup {
     public void allClearR   (double position) {Servo5.setPosition(position);}
     public void button      (double position) {Servo6.setPosition(position);}
 
-    public void smack       (double count) throws InterruptedException {
+    public void punch       (double count) throws InterruptedException {
 
         for (int i = 0; i < count; i++) {
-            button(0.45);
+            button(BUTTON_OUT);
             opControl.sleep(100);
-            button(.2);
+            button(BUTTON_SEARCH);
             opControl.sleep(100);
         }
     }
 
+    //Servo positions, change these and they will be changed everywhere
+    public static double DUMP_DOWN      = 0.4;
+    public static double DUMP_UP        = 1;
+    public static double CLIMBER_IN     = 0;
+    public static double CLIMBER_OUT    = 1;
+    public static double CLEAR_IN       = 0;
+    public static double CLEAR_OUT      = 1;
+    public static double CLEAR_WAY      = 0.5;
+    public static double BUTTON_IN      = 0;
+    public static double BUTTON_SEARCH  = 1;
+    public static double BUTTON_OUT     = 0.45;
 
     //TODO make all initalize at 0
     public void initializeServos () {
-        climberL(0);
-        climberR(0);
-        dumpArm(0.4);
-        allClearL(0);
-        allClearR(0);
-        button(0);
-        vCheck();
+        dumpArm   (DUMP_DOWN);
+        climberL  (CLIMBER_IN);
+        climberR  (CLIMBER_IN);
+        allClearL (CLEAR_IN);
+        allClearR (CLEAR_IN);
+        button    (BUTTON_IN);
     }
 
 

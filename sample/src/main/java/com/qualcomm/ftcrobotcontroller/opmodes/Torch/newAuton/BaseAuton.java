@@ -20,7 +20,6 @@ public abstract class BaseAuton extends LinearOpMode {
     static int AVOID_RED        = 4;
     static int WAIT_TIME        = 10 * 1000; //ten seconds
 
-
     enum Wait {
         YES,NO
     }
@@ -58,7 +57,7 @@ public abstract class BaseAuton extends LinearOpMode {
 
         fetty.gTurn(turn, 0.4);
 
-        fetty.allClearL(0.5);
+        fetty.allClearL(fetty.CLEAR_WAY);
         fetty.encoderMove(red_move, .5);
         
         while (fetty.floorIR.getLightDetectedRaw() < LIGHT_THRESHOLD && opModeIsActive()) {
@@ -67,24 +66,21 @@ public abstract class BaseAuton extends LinearOpMode {
         }
 
         fetty.encoderMove(2, .3);
-        fetty.dumpArm(1);
+        fetty.dumpArm(fetty.DUMP_DOWN);
         sleep(1000);
-        fetty.dumpArm(0.4);
-        fetty.button(.2);
+        fetty.dumpArm(fetty.DUMP_UP);
+        fetty.button(fetty.BUTTON_SEARCH);
         fetty.encoderMove(3.5, .5);
-        telemetry.addData("Red  ", fetty.colorSensor.red());
-        telemetry.addData("Green", fetty.colorSensor.green());
-        telemetry.addData("Blue ", fetty.colorSensor.blue());
         sleep(1000);
         int color     = alliance == alliance.BLUE ? fetty.colorSensor.blue() : fetty.colorSensor.red();
         int not_color = alliance == alliance.BLUE ? fetty.colorSensor.red() : fetty.colorSensor.blue();
 
         if (color > not_color) {
-            fetty.smack(3);
+            fetty.punch(3);
         } else if (not_color > color) {
             fetty.encoderMove(4,-.5);
             sleep(100);
-            fetty.smack(3);
+            fetty.punch(3);
         }
 
         sleep(1000);
@@ -92,6 +88,5 @@ public abstract class BaseAuton extends LinearOpMode {
         sleep(500);
         fetty.encoderMove(lastdist, lastdir);
         fetty.servoController.pwmDisable();
-
     }
 }

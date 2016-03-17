@@ -148,11 +148,15 @@ public class RobotSetup {
 
     public void punch       (double count) throws InterruptedException {
 
+        button(BUTTON_OUT);
+        if (colorSensor.red() > 1) {
+
+        }
         for (int i = 0; i < count; i++) {
             button(BUTTON_OUT);
-            opControl.sleep(100);
+            opControl.sleep(200);
             button(BUTTON_SEARCH);
-            opControl.sleep(100);
+            opControl.sleep(200);
         }
     }
 
@@ -161,11 +165,11 @@ public class RobotSetup {
     public static double DUMP_UP        = 1;
     public static double CLIMBER_IN     = 0;
     public static double CLIMBER_OUT    = 1;
-    public static double CLEAR_IN       = 0;
-    public static double CLEAR_OUT      = 1;
+    public static double CLEAR_IN       = 1;
+    public static double CLEAR_OUT      = 0;
     public static double CLEAR_WAY      = 0.5;
     public static double BUTTON_IN      = 0;
-    public static double BUTTON_SEARCH  = 1;
+    public static double BUTTON_SEARCH  = 0.2;
     public static double BUTTON_OUT     = 0.45;
 
     //TODO make all initalize at 0

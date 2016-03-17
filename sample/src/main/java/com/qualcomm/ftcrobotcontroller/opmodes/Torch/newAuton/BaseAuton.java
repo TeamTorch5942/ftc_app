@@ -19,6 +19,9 @@ public abstract class BaseAuton extends LinearOpMode {
     static int RED_LAST_DIST    = 18;
     static int AVOID_RED        = 4;
     static int WAIT_TIME        = 10 * 1000; //ten seconds
+    static int MAX_PUNCHIES     = 5;
+    private int PUNCHIES        = 0;
+    private int RED_DEADZONE    = 30;
 
     enum Wait {
         YES,NO
@@ -60,27 +63,44 @@ public abstract class BaseAuton extends LinearOpMode {
         fetty.allClearL(fetty.CLEAR_WAY);
         fetty.encoderMove(red_move, .5);
         
-        while (fetty.floorIR.getLightDetectedRaw() < LIGHT_THRESHOLD && opModeIsActive()) {
+        while (fetty.floorIR.getLightDetectedRaw() < LIGHT_THRESHOLD && opModeIsActive() && RED_DEADZONE < fetty.avgDistance()) {
             waitOneFullHardwareCycle();
             fetty.move(0.2, 0.2);
         }
 
         fetty.encoderMove(2, .3);
-        fetty.dumpArm(fetty.DUMP_DOWN);
-        sleep(1000);
         fetty.dumpArm(fetty.DUMP_UP);
+        sleep(1000);
+        fetty.dumpArm(fetty.DUMP_DOWN);
         fetty.button(fetty.BUTTON_SEARCH);
         fetty.encoderMove(3.5, .5);
         sleep(1000);
-        int color     = alliance == alliance.BLUE ? fetty.colorSensor.blue() : fetty.colorSensor.red();
-        int not_color = alliance == alliance.BLUE ? fetty.colorSensor.red() : fetty.colorSensor.blue();
+        int color1     = alliance == alliance.BLUE ? fetty.colorSensor.blue() : fetty.colorSensor.red();
+        int not_color1 = alliance == alliance.BLUE ? fetty.colorSensor.red() : fetty.colorSensor.blue();
 
-        if (color > not_color) {
-            fetty.punch(3);
-        } else if (not_color > color) {
+        //Checks if the button is pressed and beacon gets brighter
+        if (color1 > not_color1) {
+            fetty.punch(1);
+            int color2 = alliance == alliance.BLUE ? fetty.colorSensor.blue() : fetty.colorSensor.red();
+
+            while (color1 >= color2 && PUNCHIES < MAX_PUNCHIES) {
+                fetty.punch(1);
+                PUNCHIES = PUNCHIES + 1;
+                color2 = alliance == alliance.BLUE ? fetty.colorSensor.blue() : fetty.colorSensor.red();
+            }
+
+        } else if (not_color1 > color1) {
             fetty.encoderMove(4,-.5);
             sleep(100);
-            fetty.punch(3);
+            fetty.punch(1);
+
+            int color2 = alliance == alliance.BLUE ? fetty.colorSensor.blue() : fetty.colorSensor.red();
+
+            while (color1 >= color2 && PUNCHIES < MAX_PUNCHIES) {
+                fetty.punch(1);
+                PUNCHIES = PUNCHIES + 1;
+                color2 = alliance == alliance.BLUE ? fetty.colorSensor.blue() : fetty.colorSensor.red();
+            }
         }
 
         sleep(1000);

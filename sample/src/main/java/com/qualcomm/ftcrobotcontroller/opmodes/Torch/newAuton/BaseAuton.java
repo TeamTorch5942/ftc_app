@@ -41,7 +41,7 @@ public abstract class BaseAuton extends LinearOpMode {
 
 
         waitForStart();
-        fetty.initializeServos();
+        fetty.dumpArm(fetty.DUMP_DOWN);
 
 
         if (wait) {sleep(WAIT_TIME);}
@@ -56,19 +56,20 @@ public abstract class BaseAuton extends LinearOpMode {
 
         //start off slow, then speed up
         fetty.encoderMove(24, 0.3);
+        fetty.initializeServos();
         fetty.encoderMove(firstdist, 0.7);
 
         fetty.gTurn(turn, 0.4);
 
-        fetty.allClearL(fetty.CLEAR_WAY);
         fetty.encoderMove(red_move, .5);
         
-        while (fetty.floorIR.getLightDetectedRaw() < LIGHT_THRESHOLD && opModeIsActive() && RED_DEADZONE < fetty.avgDistance()) {
+        while (fetty.floorIR.getLightDetectedRaw() < LIGHT_THRESHOLD && opModeIsActive()) {
             waitOneFullHardwareCycle();
             fetty.move(0.2, 0.2);
         }
-
-        fetty.encoderMove(2, .3);
+        fetty.allClearL(0.5);
+        fetty.allClearR(0.5);
+        fetty.encoderMove(2, .2 );
         fetty.dumpArm(fetty.DUMP_UP);
         sleep(1000);
         fetty.dumpArm(fetty.DUMP_DOWN);
@@ -106,6 +107,8 @@ public abstract class BaseAuton extends LinearOpMode {
         sleep(1000);
         fetty.button(0);
         sleep(500);
+        fetty.allClearL(fetty.CLEAR_IN);
+        fetty.allClearR(fetty.CLEAR_IN);
         fetty.encoderMove(lastdist, lastdir);
         fetty.servoController.pwmDisable();
     }

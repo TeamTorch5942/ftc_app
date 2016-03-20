@@ -139,8 +139,8 @@ public class RobotSetup {
     public void moveTape    (double power)    {arm2.setPower(power);}
 
 
-    public void climberR    (double position) {Servo1.setPosition(1 - position);}
-    public void climberL    (double position) {Servo2.setPosition(position);}
+    public void climberR    (double position) {Servo1.setPosition(position);}
+    public void climberL    (double position) {Servo2.setPosition(1-position);}
     public void dumpArm     (double position) {Servo3.setPosition(position);}
     public void allClearL   (double position) {Servo4.setPosition(1-position);}
     public void allClearR   (double position) {Servo5.setPosition(position);}
@@ -165,8 +165,8 @@ public class RobotSetup {
     public static double DUMP_UP        = 1;
     public static double CLIMBER_IN     = 0;
     public static double CLIMBER_OUT    = 1;
-    public static double CLEAR_IN       = 1;
-    public static double CLEAR_OUT      = 0;
+    public static double CLEAR_IN       = 0;
+    public static double CLEAR_OUT      = 1;
     public static double CLEAR_WAY      = 0.5;
     public static double BUTTON_IN      = 0;
     public static double BUTTON_SEARCH  = 0.2;

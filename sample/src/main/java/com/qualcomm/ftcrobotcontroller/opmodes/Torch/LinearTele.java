@@ -41,12 +41,12 @@ public class LinearTele extends LinearOpMode {
             if (one.right_bumper == ButtonState.HELD) fetty.climberR(fetty.CLIMBER_OUT);   else fetty.climberR(fetty.CLIMBER_IN);
             if (one.y            == ButtonState.HELD) fetty.dumpArm(fetty.DUMP_UP);      else fetty.dumpArm(fetty.DUMP_DOWN);
             if (one.right_trigger== 1 || one.left_trigger == 1) {
-                fetty.allClearR(fetty.CLEAR_IN);
-                fetty.allClearL(fetty.CLEAR_IN);
-            }
-            else {
                 fetty.allClearR(fetty.CLEAR_OUT);
                 fetty.allClearL(fetty.CLEAR_OUT);
+            }
+            else {
+                fetty.allClearR(fetty.CLEAR_IN);
+                fetty.allClearL(fetty.CLEAR_IN);
             }
 
             //--------------------------------DIRECTION

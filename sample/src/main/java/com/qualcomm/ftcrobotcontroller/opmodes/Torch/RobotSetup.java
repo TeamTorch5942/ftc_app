@@ -154,9 +154,9 @@ public class RobotSetup {
         }
         for (int i = 0; i < count; i++) {
             button(BUTTON_OUT);
-            opControl.sleep(200);
+            opControl.sleep(300);
             button(BUTTON_SEARCH);
-            opControl.sleep(200);
+            opControl.sleep(300);
         }
     }
 
@@ -170,7 +170,7 @@ public class RobotSetup {
     public static double CLEAR_WAY      = 0.5;
     public static double BUTTON_IN      = 0;
     public static double BUTTON_SEARCH  = 0.2;
-    public static double BUTTON_OUT     = 0.45;
+    public static double BUTTON_OUT     = 0.6;
 
     //TODO make all initalize at 0
     public void initializeServos () {

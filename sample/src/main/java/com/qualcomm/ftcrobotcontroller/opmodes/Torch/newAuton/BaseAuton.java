@@ -12,8 +12,8 @@ public abstract class BaseAuton extends LinearOpMode {
     //static means these can't be modified by the program.
     static int BLUE_TURN_ANGLE  = 130;
     static int RED_TURN_ANGLE   = 40;
-    static int BLUE_MOVE_DIST   = 100;
-    static int RED_MOVE_DIST    = 51;
+    static int BLUE_MOVE_DIST   = 124;
+    static int RED_MOVE_DIST    = 75;
     static int LIGHT_THRESHOLD  = 100;
     static int BLUE_LAST_DIST   = 20;
     static int RED_LAST_DIST    = 18;
@@ -54,10 +54,8 @@ public abstract class BaseAuton extends LinearOpMode {
         double lastdir= alliance == alliance.BLUE ? 0.5 : -0.5;
 
 
-        //start off slow, then speed up
-        fetty.encoderMove(24, 0.3);
         fetty.initializeServos();
-        fetty.encoderMove(firstdist, 0.7);
+        fetty.encoderMove(firstdist, 0.5);
 
         fetty.gTurn(turn, 0.4);
 
@@ -111,5 +109,6 @@ public abstract class BaseAuton extends LinearOpMode {
         fetty.allClearR(fetty.CLEAR_IN);
         fetty.encoderMove(lastdist, lastdir);
         fetty.servoController.pwmDisable();
+        fetty.move(0,0);
     }
 }

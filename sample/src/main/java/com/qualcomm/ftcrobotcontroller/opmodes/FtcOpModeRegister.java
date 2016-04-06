@@ -41,6 +41,7 @@ import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.AutonBlue;
 import com.qualcomm.ftcrobotcontroller.opmodes.Tests.driveTest;
 import com.qualcomm.ftcrobotcontroller.opmodes.Torch.newAuton.NewAutonBlue;
 import com.qualcomm.ftcrobotcontroller.opmodes.Torch.newAuton.NewAutonRed;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.newAuton.waitAutonBlue;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
 
@@ -61,5 +62,6 @@ public class FtcOpModeRegister implements OpModeRegister {
         manager.register("Blue Auton", NewAutonBlue.class);
         manager.register("Red Auton", NewAutonRed.class);
         manager.register("Sensor Check", FloorIR.class);
+        manager.register("Wait Blue Auton", waitAutonBlue.class);
     }
 }

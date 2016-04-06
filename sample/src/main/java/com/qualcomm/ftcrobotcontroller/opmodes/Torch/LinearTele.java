@@ -30,16 +30,29 @@ public class LinearTele extends LinearOpMode {
 
             if      (two.right_trigger == 1) fetty.moveTape(-0.2);
             else if (two.right_bumper  == ButtonState.HELD) fetty.moveTape(0.2);
-            else    fetty.moveTape(-gamepad2.left_stick_y*gamepad2.left_stick_y*gamepad2.left_stick_y);//TODO slowed this down need to test
+            else    fetty.moveTape(-gamepad2.left_stick_y * gamepad2.left_stick_y * gamepad2.left_stick_y);//TODO slowed this down need to test
 
             if      (two.left_trigger == 1) fetty.moveWinch(1);
             else if (two.left_bumper == ButtonState.HELD) fetty.moveWinch(-1);
             else    fetty.moveWinch(0);
 
 
-            if (one.left_bumper  == ButtonState.HELD) fetty.climberL(fetty.CLIMBER_OUT);   else fetty.climberL(fetty.CLIMBER_IN);
+            /*if (one.left_bumper  == ButtonState.HELD) fetty.climberL(fetty.CLIMBER_OUT);   else fetty.climberL(fetty.CLIMBER_IN);
             if (one.right_bumper == ButtonState.HELD) fetty.climberR(fetty.CLIMBER_OUT);   else fetty.climberR(fetty.CLIMBER_IN);
-            if (one.y            == ButtonState.HELD) fetty.dumpArm(fetty.DUMP_UP);      else fetty.dumpArm(fetty.DUMP_DOWN);
+            */
+            if (one.left_bumper  == ButtonState.RELEASED) fetty.trigL = !fetty.trigL;
+            if (one.right_bumper == ButtonState.RELEASED) fetty.trigR = !fetty.trigR;
+
+            if (fetty.trigL) {  fetty.climberL(fetty.CLIMBER_OUT);}
+            else                fetty.climberL(fetty.CLIMBER_IN);
+
+            if (fetty.trigR) {  fetty.climberR(fetty.CLIMBER_OUT);}
+            else                fetty.climberR(fetty.CLIMBER_IN);
+
+
+            if (one.y == ButtonState.HELD) fetty.dumpArm(fetty.DUMP_UP); else fetty.dumpArm(fetty.DUMP_DOWN);
+
+            /*
             if (one.right_trigger== 1 || one.left_trigger == 1) {
                 fetty.allClearR(fetty.CLEAR_OUT);
                 fetty.allClearL(fetty.CLEAR_OUT);
@@ -47,7 +60,10 @@ public class LinearTele extends LinearOpMode {
             else {
                 fetty.allClearR(fetty.CLEAR_IN);
                 fetty.allClearL(fetty.CLEAR_IN);
-            }
+            }*/
+
+            fetty.allclear(two.right_stick_y/-2);
+
 
             //--------------------------------DIRECTION
             //This reverses our robot, so what was once our back is now our front.
@@ -55,8 +71,8 @@ public class LinearTele extends LinearOpMode {
             if (one.x == ButtonState.RELEASED) fetty.reverse();
             fetty.redLED(fetty.isreversed());
 
-            if (fetty.isreversed()) {fetty.move(-one.right_stick_y, -one.left_stick_y);}
-            else                    {fetty.move (one.left_stick_y, one.right_stick_y);}
+            if (fetty.isreversed()) {fetty.move(-one.right_stick_y, -one.left_stick_y);
+            } else {fetty.move (one.left_stick_y, one.right_stick_y);}
 
             if (gamepad1.dpad_up) {
                 fetty.frontLeft.setPower(-0.5);

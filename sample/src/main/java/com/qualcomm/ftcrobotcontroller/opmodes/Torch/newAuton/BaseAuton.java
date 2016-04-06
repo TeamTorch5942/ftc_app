@@ -10,13 +10,13 @@ import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 public abstract class BaseAuton extends LinearOpMode {
 
     //static means these can't be modified by the program.
-    static int BLUE_TURN_ANGLE  = 130;
+    static int BLUE_TURN_ANGLE  = 127;
     static int RED_TURN_ANGLE   = 40;
     static int BLUE_MOVE_DIST   = 124;
-    static int RED_MOVE_DIST    = 75;
+    static int RED_MOVE_DIST    = 77;
     static int LIGHT_THRESHOLD  = 100;
-    static int BLUE_LAST_DIST   = 20;
-    static int RED_LAST_DIST    = 18;
+    static int BLUE_LAST_DIST   = 30;
+    static int RED_LAST_DIST    = 28;
     static int AVOID_RED        = 4;
     static int WAIT_TIME        = 10 * 1000; //ten seconds
     static int MAX_PUNCHIES     = 5;
@@ -51,13 +51,13 @@ public abstract class BaseAuton extends LinearOpMode {
         int turn      = alliance == alliance.BLUE ? BLUE_TURN_ANGLE: RED_TURN_ANGLE;
         int lastdist  = alliance == alliance.BLUE ? BLUE_LAST_DIST : RED_LAST_DIST;
         int red_move  = alliance == alliance.BLUE ? 0 : AVOID_RED;
-        double lastdir= alliance == alliance.BLUE ? 0.5 : -0.5;
+        double lastdir= alliance == alliance.BLUE ? -0.9 : 0.5;
 
 
         fetty.initializeServos();
-        fetty.encoderMove(firstdist, 0.5);
+        fetty.encoderMove(firstdist, 0.7);
 
-        fetty.gTurn(turn, 0.4);
+        fetty.gTurn(turn, 0.45);
 
         fetty.encoderMove(red_move, .5);
         
@@ -67,13 +67,17 @@ public abstract class BaseAuton extends LinearOpMode {
         }
         fetty.allClearL(0.5);
         fetty.allClearR(0.5);
-        fetty.encoderMove(2, .2 );
+        fetty.encoderMove(2, .2);
         fetty.dumpArm(fetty.DUMP_UP);
+        fetty.climberL(fetty.CLIMBER_OUT);
+        fetty.climberR(fetty.CLIMBER_OUT);
         sleep(1000);
         fetty.dumpArm(fetty.DUMP_DOWN);
+        fetty.climberL(fetty.CLIMBER_IN);
+        fetty.climberR(fetty.CLIMBER_IN);
         fetty.button(fetty.BUTTON_SEARCH);
         fetty.encoderMove(3.5, .5);
-        sleep(1000);
+        sleep(500);
         int color1     = alliance == alliance.BLUE ? fetty.colorSensor.blue() : fetty.colorSensor.red();
         int not_color1 = alliance == alliance.BLUE ? fetty.colorSensor.red() : fetty.colorSensor.blue();
 
@@ -102,9 +106,8 @@ public abstract class BaseAuton extends LinearOpMode {
             }
         }
 
-        sleep(1000);
+        sleep(300);
         fetty.button(0);
-        sleep(500);
         fetty.allClearL(fetty.CLEAR_IN);
         fetty.allClearR(fetty.CLEAR_IN);
         fetty.encoderMove(lastdist, lastdir);

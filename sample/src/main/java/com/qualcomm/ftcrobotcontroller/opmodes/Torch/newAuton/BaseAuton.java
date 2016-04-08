@@ -65,8 +65,8 @@ public abstract class BaseAuton extends LinearOpMode {
             waitOneFullHardwareCycle();
             fetty.move(0.2, 0.2);
         }
-        fetty.allClearL(0.5);
-        fetty.allClearR(0.5);
+        //fetty.allClearL(0.5);
+        //fetty.allClearR(0.5);
         fetty.encoderMove(2, .2);
         fetty.dumpArm(fetty.DUMP_UP);
         fetty.climberL(fetty.CLIMBER_OUT);
@@ -108,8 +108,8 @@ public abstract class BaseAuton extends LinearOpMode {
 
         sleep(300);
         fetty.button(0);
-        fetty.allClearL(fetty.CLEAR_IN);
-        fetty.allClearR(fetty.CLEAR_IN);
+        //fetty.allClearL(fetty.CLEAR_IN);
+        //fetty.allClearR(fetty.CLEAR_IN);
         fetty.encoderMove(lastdist, lastdir);
         fetty.servoController.pwmDisable();
         fetty.move(0,0);

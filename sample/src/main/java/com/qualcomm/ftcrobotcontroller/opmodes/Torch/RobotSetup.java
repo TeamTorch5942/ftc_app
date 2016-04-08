@@ -29,7 +29,7 @@ public class RobotSetup {
 
     //for control, we use move(), moveWinch(), etc. and not (arm1 = 1.0)
 
-    public   DcMotor frontLeft, frontRight, backLeft, backRight, arm1, arm2, allclear;
+    public   DcMotor frontLeft, frontRight, backLeft, backRight, arm1, arm2, allclear, sweeper;
     private  Servo Servo1, Servo2, Servo3, Servo4, Servo5, Servo6;
     private  DeviceInterfaceModule cdim;
     private  ModernRoboticsI2cGyro G;
@@ -43,9 +43,6 @@ public class RobotSetup {
 
     //declare Reverse Variable
     int reverseVal = 0;
-    int trigValLeft = 0;
-    int trigValRight = 0;
-
     boolean trigL = false;
     boolean trigR = false;
 
@@ -79,7 +76,8 @@ public class RobotSetup {
         arm1        = hardwareMap.dcMotor.get("5");
         arm2        = hardwareMap.dcMotor.get("6");
 
-        allclear       = hardwareMap.dcMotor.get("7");
+        allclear    = hardwareMap.dcMotor.get("7");
+        sweeper     = hardwareMap.dcMotor.get("8");
 
         //Servo Controller
         servoController  = hardwareMap.servoController.get("servo");
@@ -122,11 +120,6 @@ public class RobotSetup {
     public void     reverse()   {reverseVal = 1-reverseVal;}
     public boolean  isreversed(){return reverseVal == 1;}
 
-    public void     triggerLeft()   {trigValLeft = 1-trigValLeft;}
-    public boolean  istriggeredLeft(){return trigValLeft == 1;}
-    public void     triggerRight()   {trigValRight = 1-trigValRight;}
-    public boolean  istriggeredRight(){return trigValRight == 1;}
-
 
     public int lDistance() {return frontLeft.getCurrentPosition() - leftEncoderDistance;}
     public int rDistance() {return frontRight.getCurrentPosition() - rightEncoderDistance;}
@@ -158,8 +151,8 @@ public class RobotSetup {
     public void climberR    (double position) {Servo1.setPosition(1-position);}
     public void climberL    (double position) {Servo2.setPosition(position);}
     public void dumpArm     (double position) {Servo3.setPosition(position);}
-    public void allClearL   (double position) {Servo4.setPosition(1-position);}
-    public void allClearR   (double position) {Servo5.setPosition(position);}
+    public void doorL       (double position) {Servo4.setPosition(1-position);}
+    public void doorR       (double position) {Servo5.setPosition(position);}
     public void button      (double position) {Servo6.setPosition(position);}
 
     public void punch       (double count) throws InterruptedException {
@@ -181,9 +174,8 @@ public class RobotSetup {
     public static double DUMP_UP        = 1;
     public static double CLIMBER_IN     = 0;
     public static double CLIMBER_OUT    = 0.6;
-    public static double CLEAR_IN       = 0.7;
-    public static double CLEAR_OUT      = 0;
-    public static double CLEAR_WAY      = 0.5;
+    public static double DOOR_IN        = 0.7;
+    public static double DOOR_OUT       = 0;
     public static double BUTTON_IN      = 0;
     public static double BUTTON_SEARCH  = 0.2;
     public static double BUTTON_OUT     = 0.6;
@@ -193,8 +185,8 @@ public class RobotSetup {
         dumpArm   (DUMP_DOWN);
         climberL  (CLIMBER_IN);
         climberR  (CLIMBER_IN);
-        allClearL (CLEAR_IN);
-        allClearR (CLEAR_IN);
+        doorL     (DOOR_IN);
+        doorR     (DOOR_IN);
         button    (BUTTON_IN);
     }
 

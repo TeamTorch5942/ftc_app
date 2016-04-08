@@ -37,9 +37,6 @@ public class LinearTele extends LinearOpMode {
             else    fetty.moveWinch(0);
 
 
-            /*if (one.left_bumper  == ButtonState.HELD) fetty.climberL(fetty.CLIMBER_OUT);   else fetty.climberL(fetty.CLIMBER_IN);
-            if (one.right_bumper == ButtonState.HELD) fetty.climberR(fetty.CLIMBER_OUT);   else fetty.climberR(fetty.CLIMBER_IN);
-            */
             if (one.left_bumper  == ButtonState.RELEASED) fetty.trigL = !fetty.trigL;
             if (one.right_bumper == ButtonState.RELEASED) fetty.trigR = !fetty.trigR;
 
@@ -50,17 +47,13 @@ public class LinearTele extends LinearOpMode {
             else                fetty.climberR(fetty.CLIMBER_IN);
 
 
+            if (two.dpad_down    == ButtonState.RELEASED) fetty.sweeper.setPower(-1);
+            if (two.dpad_up      == ButtonState.RELEASED) fetty.sweeper.setPower(1);
+            if (two.dpad_left    == ButtonState.RELEASED) fetty.sweeper.setPower(0);
+
+
             if (one.y == ButtonState.HELD) fetty.dumpArm(fetty.DUMP_UP); else fetty.dumpArm(fetty.DUMP_DOWN);
 
-            /*
-            if (one.right_trigger== 1 || one.left_trigger == 1) {
-                fetty.allClearR(fetty.CLEAR_OUT);
-                fetty.allClearL(fetty.CLEAR_OUT);
-            }
-            else {
-                fetty.allClearR(fetty.CLEAR_IN);
-                fetty.allClearL(fetty.CLEAR_IN);
-            }*/
 
             fetty.allclear(two.right_stick_y/-2);
 

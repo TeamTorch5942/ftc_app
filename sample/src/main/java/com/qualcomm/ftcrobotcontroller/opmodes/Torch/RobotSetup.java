@@ -1,15 +1,9 @@
 package com.qualcomm.ftcrobotcontroller.opmodes.Torch;
 
-import android.graphics.Color;
-
-import com.lasarobotics.library.controller.ButtonState;
+import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsDigitalTouchSensor;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
-import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
-import com.qualcomm.robotcore.hardware.DigitalChannel;
-import com.qualcomm.robotcore.hardware.DigitalChannelController;
-import com.qualcomm.robotcore.hardware.LED;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -21,6 +15,8 @@ import com.qualcomm.robotcore.robocol.Telemetry;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.lasarobotics.library.drive.Tank;
+
+import java.util.InputMismatchException;
 
 public class RobotSetup {
 
@@ -111,12 +107,17 @@ public class RobotSetup {
     //TODO only moved 4 motors sometimes. need to figure out why.
     public void move(double l, double r) throws InterruptedException {
         opControl.waitOneFullHardwareCycle();
+        l= Range.clip(l,-1,1);
+        r=Range.clip(r,-1,1);
         Tank.motor4(    frontLeft,
                         frontRight,
                         backLeft,
                         backRight,
                         l, r);}
 
+    public void arcadeMove(double throttle, double turn) throws InterruptedException {
+        move(throttle+turn,throttle-turn);
+    }
     public void     reverse()   {reverseVal = 1-reverseVal;}
     public boolean  isreversed(){return reverseVal == 1;}
 
@@ -185,8 +186,8 @@ public class RobotSetup {
         dumpArm   (DUMP_DOWN);
         climberL  (CLIMBER_IN);
         climberR  (CLIMBER_IN);
-        doorL     (DOOR_IN);
-        doorR     (DOOR_IN);
+        doorL(DOOR_IN);
+        doorR(DOOR_IN);
         button    (BUTTON_IN);
     }
 

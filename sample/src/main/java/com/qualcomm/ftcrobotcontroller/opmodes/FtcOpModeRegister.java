@@ -31,17 +31,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.AutonBlueWait;
-import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.AutonRed;
-import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.AutonRedColor;
-import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.AutonRedWait;
 import com.qualcomm.ftcrobotcontroller.opmodes.Torch.FloorIR;
 import com.qualcomm.ftcrobotcontroller.opmodes.Torch.LinearTele;
-import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.AutonBlue;
-import com.qualcomm.ftcrobotcontroller.opmodes.Tests.driveTest;
-import com.qualcomm.ftcrobotcontroller.opmodes.Torch.newAuton.NewAutonBlue;
-import com.qualcomm.ftcrobotcontroller.opmodes.Torch.newAuton.NewAutonRed;
-import com.qualcomm.ftcrobotcontroller.opmodes.Torch.newAuton.waitAutonBlue;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.supersAuton.NewAutonBlue;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.supersAuton.NewAutonRed;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.supersAuton.waitAutonBlue;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
 
@@ -59,9 +53,5 @@ public class FtcOpModeRegister implements OpModeRegister {
     public void register(OpModeManager manager) {
         //Custom op modes
         manager.register("Teleop", LinearTele.class);
-        manager.register("Blue Auton", NewAutonBlue.class);
-        manager.register("Red Auton", NewAutonRed.class);
-        manager.register("Sensor Check", FloorIR.class);
-        manager.register("Wait Blue Auton", waitAutonBlue.class);
     }
 }

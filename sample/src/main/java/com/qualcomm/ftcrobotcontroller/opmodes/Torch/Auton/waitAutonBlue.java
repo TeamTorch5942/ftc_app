@@ -1,4 +1,4 @@
-package com.qualcomm.ftcrobotcontroller.opmodes.Torch.supersAuton;
+package com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton;
 
 /**
  * Created by taand on 3/10/2016.

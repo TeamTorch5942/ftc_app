@@ -1,4 +1,4 @@
-package com.qualcomm.ftcrobotcontroller.opmodes.Torch.NewAuton.supersAuton;
+package com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton;
 
 import com.qualcomm.ftcrobotcontroller.opmodes.Torch.RobotSetup;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -40,7 +40,7 @@ public abstract class BaseAuton extends LinearOpMode {
 
 
         waitForStart();
-        fetty.dumpArm(fetty.DUMP_DOWN);
+        //fetty.dumpArm(fetty.DUMP_DOWN);
 
 
         if (wait) {sleep(WAIT_TIME);}
@@ -67,14 +67,14 @@ public abstract class BaseAuton extends LinearOpMode {
         //fetty.allClearL(0.5);
         //fetty.allClearR(0.5);
         fetty.encoderMove(2, .2);
-        fetty.dumpArm(fetty.DUMP_UP);
+        //fetty.dumpArm(fetty.DUMP_UP);
         fetty.climberL(fetty.CLIMBER_OUT);
         fetty.climberR(fetty.CLIMBER_OUT);
         sleep(1000);
-        fetty.dumpArm(fetty.DUMP_DOWN);
+        //fetty.dumpArm(fetty.DUMP_DOWN);
         fetty.climberL(fetty.CLIMBER_IN);
         fetty.climberR(fetty.CLIMBER_IN);
-        fetty.button(fetty.BUTTON_SEARCH);
+        //fetty.button(fetty.BUTTON_SEARCH);
         fetty.encoderMove(3.5, .5);
         sleep(500);
         int color1     = alliance == alliance.BLUE ? fetty.colorSensor.blue() : fetty.colorSensor.red();
@@ -82,31 +82,31 @@ public abstract class BaseAuton extends LinearOpMode {
 
         //Checks if the button is pressed and beacon gets brighter
         if (color1 > not_color1) {
-            fetty.punch(1);
+            //fetty.punch(1);
             int color2 = alliance == alliance.BLUE ? fetty.colorSensor.blue() : fetty.colorSensor.red();
 
             while (color1 >= color2 && PUNCHIES < MAX_PUNCHIES) {
-                fetty.punch(1);
+                //fetty.punch(1);
                 PUNCHIES = PUNCHIES + 1;
                 color2 = alliance == alliance.BLUE ? fetty.colorSensor.blue() : fetty.colorSensor.red();
             }
 
         } else if (not_color1 > color1) {
-            fetty.encoderMove(4,-.5);
+            fetty.encoderMove(4, -.5);
             sleep(100);
-            fetty.punch(1);
+            //fetty.punch(1);
 
             int color2 = alliance == alliance.BLUE ? fetty.colorSensor.blue() : fetty.colorSensor.red();
 
             while (color1 >= color2 && PUNCHIES < MAX_PUNCHIES) {
-                fetty.punch(1);
+                //fetty.punch(1);
                 PUNCHIES = PUNCHIES + 1;
                 color2 = alliance == alliance.BLUE ? fetty.colorSensor.blue() : fetty.colorSensor.red();
             }
         }
 
         sleep(300);
-        fetty.button(0);
+        //fetty.button(0);
         //fetty.allClearL(fetty.CLEAR_IN);
         //fetty.allClearR(fetty.CLEAR_IN);
         fetty.encoderMove(lastdist, lastdir);

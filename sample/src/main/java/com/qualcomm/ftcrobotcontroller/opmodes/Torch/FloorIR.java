@@ -11,14 +11,14 @@ public class FloorIR extends LinearOpMode{
         RobotSetup fetty  = new RobotSetup(hardwareMap,telemetry,this);
 
         fetty.initializeServos();
-        fetty.allClearR(0.5);
-        fetty.allClearL(0.5);
-        fetty.button(.3);
+        //fetty.allClearR(0.5);
+        //fetty.allClearL(0.5);
+        //fetty.button(.3);
         waitForStart();
         while(opModeIsActive()){
             fetty.colorTelemetry();
             fetty.floorTelemetry();
-            fetty.dumpArm((gamepad1.left_stick_y+1)/2);
+            //fetty.dumpArm((gamepad1.left_stick_y+1)/2);
         }
 
 

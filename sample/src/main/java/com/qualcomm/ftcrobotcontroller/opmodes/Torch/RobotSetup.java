@@ -1,5 +1,6 @@
 package com.qualcomm.ftcrobotcontroller.opmodes.Torch;
 
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsDigitalTouchSensor;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
@@ -35,7 +36,7 @@ public class RobotSetup {
     public   OpticalDistanceSensor floorIR;
     public   ServoController servoController;
     private  VoltageSensor voltage;
-    public   ModernRoboticsDigitalTouchSensor touch;
+    public   ModernRoboticsDigitalTouchSensor T;
 
     //declare Reverse Variable
     int reverseVal = 0;
@@ -60,6 +61,8 @@ public class RobotSetup {
         cdim        = hardwareMap.deviceInterfaceModule.get("dim");
         floorIR     = hardwareMap.opticalDistanceSensor.get("ir");
         colorSensor = hardwareMap.colorSensor.get("color");
+        T = (ModernRoboticsDigitalTouchSensor) hardwareMap.touchSensor.get("touch");
+
 
 
         //Motors
@@ -86,6 +89,7 @@ public class RobotSetup {
         
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
         backLeft.setDirection(DcMotor.Direction.REVERSE);
+        allclear.setDirection(DcMotor.Direction.REVERSE);
 
 
         /*Our Alliance Selection Menu Setup
@@ -116,7 +120,7 @@ public class RobotSetup {
                         l, r);}
 
     public void arcadeMove(double throttle, double turn) throws InterruptedException {
-        move(throttle+turn,throttle-turn);
+        move(throttle + turn, throttle - turn);
     }
     public void     reverse()   {reverseVal = 1-reverseVal;}
     public boolean  isreversed(){return reverseVal == 1;}
@@ -144,19 +148,20 @@ public class RobotSetup {
     }
 
 
+
     public void moveWinch   (double power)    {arm1.setPower(power);}
     public void moveTape    (double power)    {arm2.setPower(power);}
-    public void allclear    (double power)    {allclear.setPower(power);}
+    public void arm         (double power)    {allclear.setPower(power);}
 
 
     public void climberR    (double position) {Servo1.setPosition(1-position);}
     public void climberL    (double position) {Servo2.setPosition(position);}
-    public void dumpArm     (double position) {Servo3.setPosition(position);}
     public void doorL       (double position) {Servo4.setPosition(1-position);}
     public void doorR       (double position) {Servo5.setPosition(position);}
-    public void button      (double position) {Servo6.setPosition(position);}
+    public void conveyor    (double position) {Servo6.setPosition(position); Servo3.setPosition(position);}
 
-    public void punch       (double count) throws InterruptedException {
+    /*
+    public void punch       (double cou`nt) throws InterruptedException {
 
         button(BUTTON_OUT);
         if (colorSensor.red() > 1) {
@@ -169,6 +174,7 @@ public class RobotSetup {
             opControl.sleep(300);
         }
     }
+    */
 
     //Servo positions, change these and they will be changed everywhere
     public static double DUMP_DOWN      = 0.4;
@@ -180,15 +186,18 @@ public class RobotSetup {
     public static double BUTTON_IN      = 0;
     public static double BUTTON_SEARCH  = 0.2;
     public static double BUTTON_OUT     = 0.6;
+    public static double CONVEYOR       = 0.5;
+
 
     //TODO make all initalize at 0
     public void initializeServos () {
-        dumpArm   (DUMP_DOWN);
+        //dumpArm   (DUMP_DOWN);
         climberL  (CLIMBER_IN);
         climberR  (CLIMBER_IN);
         doorL(DOOR_IN);
         doorR(DOOR_IN);
-        button    (BUTTON_IN);
+        conveyor(CONVEYOR);
+        //button    (BUTTON_IN);
     }
 
 

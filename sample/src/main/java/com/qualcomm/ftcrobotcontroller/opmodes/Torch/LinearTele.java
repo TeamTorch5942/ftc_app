@@ -88,6 +88,10 @@ public class LinearTele extends LinearOpMode {
             }
 
             telemetry.addData("Touch", fetty.T);
+            telemetry.addData("Touch", fetty.gyroDelta());
+            telemetry.addData("Touch", fetty.allclear.getCurrentPosition());
+
+
 
 
 

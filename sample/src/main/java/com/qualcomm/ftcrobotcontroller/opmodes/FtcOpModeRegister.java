@@ -31,7 +31,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.NewAutonRed;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.BlueClose;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.BlueFar;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.RedClose;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.RedFar;
 import com.qualcomm.ftcrobotcontroller.opmodes.Torch.LinearTele;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
@@ -50,6 +53,13 @@ public class FtcOpModeRegister implements OpModeRegister {
     public void register(OpModeManager manager) {
         //Custom op modes
         manager.register("Teleop", LinearTele.class);
-        manager.register("red",NewAutonRed.class);
+        manager.register("red close",RedClose.class);
+        manager.register("red far",RedFar.class);
+        manager.register("blue close",BlueClose.class);
+        manager.register("blue far",BlueFar.class);
+
+
+
+
     }
 }

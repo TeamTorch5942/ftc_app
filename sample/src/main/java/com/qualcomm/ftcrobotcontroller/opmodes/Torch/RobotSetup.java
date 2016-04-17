@@ -38,6 +38,8 @@ public class RobotSetup {
     private  VoltageSensor voltage;
     public   ModernRoboticsDigitalTouchSensor T;
 
+    static int TICKS_PER_INCH = (1600 * 2/3) / 12; //1600 is the constant for 60 motors. multiply by 2/3 to get for 40's.
+
     //declare Reverse Variable
     int reverseVal = 0;
     boolean trigL = false;
@@ -47,6 +49,7 @@ public class RobotSetup {
     //declare motor control variables
     private int leftEncoderDistance;
     private int rightEncoderDistance;
+    private int armEncoderDistance;
     private int gyroDistance;
     private Telemetry telemetry;
     private LinearOpMode opControl;
@@ -126,10 +129,12 @@ public class RobotSetup {
     public boolean  isreversed(){return reverseVal == 1;}
 
 
+    public int armPos()    {return allclear.getCurrentPosition() - armEncoderDistance;}
     public int lDistance() {return frontLeft.getCurrentPosition() - leftEncoderDistance;}
     public int rDistance() {return frontRight.getCurrentPosition() - rightEncoderDistance;}
     public int avgDistance(){return (lDistance()+rDistance())/2;}
 
+    public void resetArm()     {armEncoderDistance   = allclear.getCurrentPosition();}
     public void resetLEncoder(){leftEncoderDistance  = frontLeft.getCurrentPosition();}
     public void resetREncoder(){rightEncoderDistance = frontRight.getCurrentPosition();}
     public void resetEncoders(){
@@ -139,10 +144,10 @@ public class RobotSetup {
     public void encoderMove(double inches, double power) throws InterruptedException {
         resetLEncoder();
         resetREncoder();
-        while (Math.abs(avgDistance() )<= Math.abs(inches*1600/12)) {
+        while (Math.abs(avgDistance() )<= Math.abs(inches * TICKS_PER_INCH)){
             opControl.waitOneFullHardwareCycle();
             move(power,power);
-            telemetry.addData("distance",avgDistance()*12 / 1600);
+            telemetry.addData("distance",avgDistance());
         }
         move(0, 0);
     }
@@ -221,11 +226,10 @@ public class RobotSetup {
         resetDelta();               //Reset Gyro
         float direction = Math.signum(degrees); //get +/- sign of target
         opControl.waitOneFullHardwareCycle();
-        move(-direction * power, direction * power);
         //move in the right direction
-        //we start moving BEFORE the while loop.
         while ( Math.abs(gyroDelta()) < Math.abs(degrees)){
             opControl.waitOneFullHardwareCycle();
+            move(-direction * power, direction * power);
         }
         move(0, 0);
         resetEncoders();

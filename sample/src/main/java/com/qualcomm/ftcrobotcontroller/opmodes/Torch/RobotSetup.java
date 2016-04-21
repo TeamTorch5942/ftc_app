@@ -32,10 +32,8 @@ public class RobotSetup {
     private  ModernRoboticsI2cGyro G;
     public   OptionMenu allianceMenu;
     public   ColorSensor colorSensor;
-    public   OpticalDistanceSensor IRsensor;
     public   OpticalDistanceSensor floorIR;
     public   ServoController servoController;
-    private  VoltageSensor voltage;
     public   ModernRoboticsDigitalTouchSensor T;
 
     static int TICKS_PER_INCH = (1600 * 2/3) / 12; //1600 is the constant for 60 motors. multiply by 2/3 to get for 40's.
@@ -182,15 +180,10 @@ public class RobotSetup {
     */
 
     //Servo positions, change these and they will be changed everywhere
-    public static double DUMP_DOWN      = 0.4;
-    public static double DUMP_UP        = 1;
     public static double CLIMBER_IN     = 0;
     public static double CLIMBER_OUT    = 0.6;
     public static double DOOR_IN        = 0.7;
     public static double DOOR_OUT       = 0;
-    public static double BUTTON_IN      = 0;
-    public static double BUTTON_SEARCH  = 0.2;
-    public static double BUTTON_OUT     = 0.6;
     public static double CONVEYOR       = 0.5;
 
 
@@ -201,7 +194,6 @@ public class RobotSetup {
         climberR  (CLIMBER_IN);
         doorL(DOOR_IN);
         doorR(DOOR_IN);
-        conveyor(CONVEYOR);
         //button    (BUTTON_IN);
     }
 
@@ -217,8 +209,9 @@ public class RobotSetup {
 
     //----------------------------------------------------------------SENSOR FUNCTIONS
 
+    public boolean isTouched() {return T.isPressed();}
+
     //TODO new Gyro Reset functions
-    public double vCheck() {return voltage.getVoltage();}
     public int gyroDelta() {return gyroDistance - G.getIntegratedZValue();}
     public void resetDelta(){gyroDistance  = G.getIntegratedZValue();}
 

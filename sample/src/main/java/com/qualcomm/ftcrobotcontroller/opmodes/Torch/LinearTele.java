@@ -81,7 +81,7 @@ public class LinearTele extends LinearOpMode {
 
 
             if (fetty.T.isPressed()){
-                fetty.arm(Math.max(two.right_stick_y,0));
+                fetty.arm(Math.min(two.right_stick_y,0));
             }
             else {
                 fetty.arm(two.right_stick_y * 2/3);

@@ -7,5 +7,6 @@ public class BlueFar extends BaseAutonArm {
     Alliance getAlliance()  {return Alliance.BLUE;}
     Wait     getWait()      {return Wait.NO;}
     Placement getPlacement(){return Placement.FAR;}
+    Defense   getDefense()  {return Defense.NO;}
 
 }

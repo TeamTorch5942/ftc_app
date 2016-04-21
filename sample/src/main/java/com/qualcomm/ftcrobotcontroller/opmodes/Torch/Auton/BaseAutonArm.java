@@ -16,8 +16,8 @@ public abstract class BaseAutonArm extends LinearOpMode {
     static int LIGHT_THRESHOLD  = 100;
     static int WAIT_TIME        = 10 * 1000; //ten seconds
     static int turnDir          = 1;
-    static int MOVE_DEFENSE     = 20;
-    static int TURN_DEFENSE     = 45;
+    static int MOVE_DEFENSE     = 60;
+    static int TURN_DEFENSE     = 37;
 
 
     enum Wait {
@@ -56,10 +56,9 @@ public abstract class BaseAutonArm extends LinearOpMode {
         if (wait) {sleep(WAIT_TIME);}
 
         //if alliance.BLUE == true, then dist = 24, else dist = 73
-        int firstdist = placement == placement.FAR ? FAR_MOVE_DIST : CLOSE_MOVE_DIST;
-        int turnAngle      = placement == placement.FAR ? FAR_TURN_ANGLE: CLOSE_TURN_ANGLE;
-        int Dturn   = defense == defense.YES ? TURN_DEFENSE : 0;
-        int Dmove   = defense == defense.YES ? MOVE_DEFENSE : 0;
+        int firstdist   = placement == placement.FAR ? FAR_MOVE_DIST : CLOSE_MOVE_DIST;
+        int turnAngle   = placement == placement.FAR ? FAR_TURN_ANGLE: CLOSE_TURN_ANGLE;
+        int Dturn       = alliance  == alliance.BLUE  ? TURN_DEFENSE  : -TURN_DEFENSE;
 
         if (alliance == alliance.RED  && placement == placement.FAR  ) turnDir = -1;
         if (alliance == alliance.RED  && placement == placement.CLOSE) turnDir =  1;
@@ -101,8 +100,10 @@ public abstract class BaseAutonArm extends LinearOpMode {
         }
         fetty.arm(0);
 
-        fetty.gTurn(Dturn,.5);
-        fetty.move(Dmove, 1);
+        if (defense == defense.YES) {
+            fetty.gTurn(Dturn, 1);
+            fetty.encoderMove(MOVE_DEFENSE,1);
+        }
 
         fetty.servoController.pwmDisable();
         fetty.move(0, 0);

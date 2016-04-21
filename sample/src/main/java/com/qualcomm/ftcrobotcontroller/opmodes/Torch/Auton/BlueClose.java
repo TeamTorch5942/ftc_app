@@ -7,6 +7,6 @@ public class BlueClose extends BaseAutonArm {
     Alliance getAlliance()  {return Alliance.BLUE;}
     Wait     getWait()      {return Wait.NO;}
     Placement getPlacement(){return Placement.CLOSE;}
-    Defense   getDefense()  {return Defense.NO;}
+    Defense   getDefense()  {return Defense.YES;}
 
 }

@@ -159,8 +159,8 @@ public class RobotSetup {
 
     public void climberR    (double position) {Servo1.setPosition(1-position);}
     public void climberL    (double position) {Servo2.setPosition(position);}
-    public void doorL       (double position) {Servo4.setPosition(1-position);}
-    public void doorR       (double position) {Servo5.setPosition(position);}
+    public void doorL       (double position) {Servo4.setPosition(position);}
+    public void doorR       (double position) {Servo5.setPosition(1-position);}
     public void conveyor    (double position) {Servo6.setPosition(position); Servo3.setPosition(position);}
 
     /*
@@ -182,8 +182,8 @@ public class RobotSetup {
     //Servo positions, change these and they will be changed everywhere
     public static double CLIMBER_IN     = 0;
     public static double CLIMBER_OUT    = 0.6;
-    public static double DOOR_IN        = 0.7;
-    public static double DOOR_OUT       = 0;
+    public static double DOOR_IN        = 0;
+    public static double DOOR_OUT       = 0.7;
     public static double CONVEYOR       = 0.5;
 
 
@@ -214,6 +214,8 @@ public class RobotSetup {
     //TODO new Gyro Reset functions
     public int gyroDelta() {return gyroDistance - G.getIntegratedZValue();}
     public void resetDelta(){gyroDistance  = G.getIntegratedZValue();}
+    public int tiltX() {return G.rawX();}
+    public int tiltY() {return G.rawY();}
 
     public void gTurn(int degrees, double power) throws InterruptedException {
         resetDelta();               //Reset Gyro

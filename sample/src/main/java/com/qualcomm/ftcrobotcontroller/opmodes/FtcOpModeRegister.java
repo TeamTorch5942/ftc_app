@@ -35,6 +35,18 @@ import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.BlueClose;
 import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.BlueFar;
 import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.RedClose;
 import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.RedFar;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.waitBlueClose;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.waitBlueFar;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.waitRedClose;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.waitRedFar;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.waitBlueCloseDefense;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.waitBlueFarDefense;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.waitRedCloseDefense;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.waitRedFarDefense;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.BlueCloseDefense;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.BlueFarDefense;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.RedCloseDefense;
+import com.qualcomm.ftcrobotcontroller.opmodes.Torch.Auton.RedFarDefense;
 import com.qualcomm.ftcrobotcontroller.opmodes.Torch.LinearTele;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
@@ -57,9 +69,17 @@ public class FtcOpModeRegister implements OpModeRegister {
         manager.register("red far",RedFar.class);
         manager.register("blue close",BlueClose.class);
         manager.register("blue far",BlueFar.class);
-
-
-
-
+        manager.register("wait red close",waitRedClose.class);
+        manager.register("wait red far",waitRedFar.class);
+        manager.register("wait blue close",waitBlueClose.class);
+        manager.register("wait blue far",waitBlueFar.class);
+        manager.register("defense red close",RedCloseDefense.class);
+        manager.register("defense red far",RedFarDefense.class);
+        manager.register("defense blue close",BlueCloseDefense.class);
+        manager.register("defense blue far",BlueFarDefense.class);
+        manager.register("wait defense red close",waitRedCloseDefense.class);
+        manager.register("wait defense red far",waitRedFarDefense.class);
+        manager.register("wait defense blue close",waitBlueCloseDefense.class);
+        manager.register("wait defense blue far",waitBlueFarDefense.class);
     }
 }

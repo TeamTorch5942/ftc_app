@@ -1,5 +1,6 @@
 package com.qualcomm.ftcrobotcontroller.opmodes.Torch;
 
+import com.lasarobotics.library.util.RollingAverage;
 import com.qualcomm.robotcore.util.Range;
 
 import com.lasarobotics.library.controller.ButtonState;
@@ -10,6 +11,7 @@ public class LinearTele extends LinearOpMode {
 
     Controller one = new Controller();
     Controller two = new Controller();
+    RollingAverage avg = new RollingAverage(20);
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -84,13 +86,17 @@ public class LinearTele extends LinearOpMode {
                 fetty.arm(Math.min(two.right_stick_y,0));
             }
             else {
-                fetty.arm(two.right_stick_y * 2/3);
+                fetty.arm(two.right_stick_y);
             }
 
-            telemetry.addData("Touch", fetty.T);
-            telemetry.addData("Touch", fetty.gyroDelta());
-            telemetry.addData("Touch", fetty.allclear.getCurrentPosition());
+            /*if (fetty.tilt() > 30) {
+                fetty.arm(two.right_stick_y);
+            }*/
 
+            avg.addValue(fetty.tiltY());
+            telemetry.addData("Touch", fetty.T);
+            telemetry.addData("avg", avg.getAverage());
+            telemetry.addData("Y", fetty.tiltY());
 
 
 

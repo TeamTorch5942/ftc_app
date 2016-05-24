@@ -36,16 +36,5 @@ public abstract class Noob extends LinearOpMode {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     }
 }
